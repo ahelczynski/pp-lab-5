@@ -6,16 +6,22 @@ import company.utils.MathUtils;
 
 public class Main {
     public static void main(String[] args) {
+        Person[] people = new Person[5];
+        final int b = 10;
+
         try {
-            Person person = new Person("Adam Ostoja-Hełczyński", 30);
-            System.out.println("Osoba: " + person.getName() + ", Wiek: " + person.getAge());
+            people[0] = new Person("John Doe", 30);
+            people[1] = new Person("Adam Ostoja", 25);
+            people[2] = new Person("Adam Hełczyński", 40);
+            people[3] = new Person("Adam Ostoja-Hełczyński", 22);
+            people[4] = new Person("Ostoja-Hełczynski", 35);
 
-            // Dodawanie dwóch liczb za pomocą klasy MathUtils
-            int suma = MathUtils.add(5, 7);
-            System.out.println("Suma liczby 5 i 7 to: " + suma);
-
-            Messenger emailMessenger = new EmailMessenger();
-            emailMessenger.sendMessage("Witaj, " + person.getName() + "! Suma liczby 5 i 7 to: " + suma);
+            Messenger emailMessenger = new EmailMessenger();          
+            for (Person person : people) {
+                int agePlusB = MathUtils.add(person.getAge(), b);
+                String message = "Witaj, " + person.getName() + "! Twój wiek plus 10 wynosi: " + agePlusB;
+                emailMessenger.sendMessage(message);
+            }
 
         } catch (InvalidAgeException e) {
             System.err.println("Wystąpił błąd przy tworzeniu osoby: " + e.getMessage());
